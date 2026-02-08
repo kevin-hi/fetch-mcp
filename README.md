@@ -31,7 +31,9 @@ pip install -e ".[dev]"
 
 ## Configuration
 
-Add to your Claude Code MCP config (`~/.claude.json`):
+### Claude Code
+
+Add to `~/.claude/.mcp.json`:
 
 ```json
 {
@@ -43,6 +45,39 @@ Add to your Claude Code MCP config (`~/.claude.json`):
   }
 }
 ```
+
+### Claude Desktop
+
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or equivalent:
+
+```json
+{
+  "mcpServers": {
+    "fetch": {
+      "command": "/path/to/fetch-mcp/.venv/bin/python",
+      "args": ["/path/to/fetch-mcp/server.py"]
+    }
+  }
+}
+```
+
+### Ensuring Claude Uses This Tool
+
+To ensure Claude always uses `mcp__fetch__fetch` instead of built-in WebFetch:
+
+1. **Install the skill** (teaches Claude to prefer this tool):
+   ```bash
+   mkdir -p ~/.claude/skills/web-fetch
+   # Copy SKILL.md from this repo to ~/.claude/skills/web-fetch/
+   ```
+
+2. **Optional: Add warning hook** to catch WebFetch attempts:
+   ```bash
+   mkdir -p ~/.claude/hooks
+   # Copy hooks.json from this repo to ~/.claude/hooks/
+   ```
+
+3. **Restart Claude** to load the new configuration
 
 ## Usage
 

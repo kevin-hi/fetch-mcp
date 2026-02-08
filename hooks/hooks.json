@@ -1,0 +1,13 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "WebFetch",
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "STOP: You're about to use built-in WebFetch, which will likely fail with 403 Forbidden on bot-protected sites.\n\nUSE mcp__fetch__fetch INSTEAD:\n\nmcp__fetch__fetch(url=\"{{url}}\", max_length=8000)\n\nThis tool sends browser-like headers and bypasses bot detection.\n\nOnly proceed with WebFetch if you're certain the site doesn't block bots."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[project]
+name = "mcp-browser-fetch"
+version = "0.1.0"
+description = "MCP server for browser-like web fetching with auto-updating user agent"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "requests>=2.31.0",
+    "html2text>=2024.2.26",
+    "brotli>=1.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+mcp-browser-fetch = "server:mcp.run"

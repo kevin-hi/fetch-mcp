@@ -24,6 +24,9 @@ cd fetch-mcp
 python3 -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -e .
+
+# For development (includes test dependencies)
+pip install -e ".[dev]"
 ```
 
 ## Configuration
@@ -54,7 +57,41 @@ fetch(
 )
 ```
 
-## Testing
+## Development
+
+### Running Tests
+
+```bash
+# Install dev dependencies
+pip install -e ".[dev]"
+
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=server --cov-report=html
+
+# Run specific test class
+pytest test_server.py::TestChromeVersion
+
+# Run specific test
+pytest test_server.py::TestChromeVersion::test_version_calculation_current_date
+```
+
+### Test Coverage
+
+The test suite covers:
+- Chrome version calculation and bounds
+- Platform detection (macOS, Windows, Linux, ARM, Intel)
+- Session management and reuse
+- Browser header generation
+- URL validation (http/https only, rejects file://, javascript:, data:, ftp:)
+- Response size limits (50MB cap)
+- Error handling (404, connection errors, timeouts)
+- HTML parsing and fallback
+- Pagination functionality
+
+### Manual Testing
 
 Successfully tested against:
 - CamelCamelCamel (was 403 blocked with default MCP)

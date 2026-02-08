@@ -10,9 +10,26 @@ dependencies = [
     "brotli>=1.0.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+only-include = ["server.py"]
+
 [project.scripts]
 mcp-browser-fetch = "server:mcp.run"
+
+[tool.pytest.ini_options]
+testpaths = ["test_server.py"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --tb=short"
